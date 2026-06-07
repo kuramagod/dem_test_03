@@ -1,0 +1,41 @@
+﻿<Window x:Class="dem_test_03.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:dem_test_03"
+        FontFamily="Times New Roman"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Title="LoginWindow" Height="500" Width="500">
+    <Grid>
+        <!-- Лучше расставилять мышкой через панель элементов, просто для красоты примера я использовал сетку -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Grid.Row="0" Grid.Column="1" Height="100" Width="100" Source="/images/Icon.png" Margin="0,20,0,0"/>
+        <Label Grid.Row="1" Grid.Column="1" Content="Авторизация" FontSize="24" Margin="0,20,0,0"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Логин" Margin="0,20,0,0"/>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="logtxt" Width="400" Height="30" Margin="0,5,0,0"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="Пароль" Margin="0,15,0,0"/>
+        <PasswordBox Grid.Row="5" Grid.Column="1" x:Name="passtxt" Width="400" Height="30" Margin="0,5,0,0"/>
+        <Button Grid.Row="6" Grid.Column="1" Content="Войти" Width="400" Height="30" Margin="0,15,0,0" Background="#7FFF00" Click="Button_Click"/>
+        <Button Grid.Row="7" Grid.Column="1" Content="Войти как гость" Width="400" Height="30" Margin="0,10,0,20" Background="#00FA9A" Click="Button_Click_1"/>
+    </Grid>
+</Window>
