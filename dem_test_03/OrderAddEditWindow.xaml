@@ -28,6 +28,6 @@
         <TextBox x:Name="DeliveryDateBox"/>
 
         <Button Content="Сохранить" Margin="0,20,0,0" Click="SaveButton"/>
-        <Button Content="Удалить" Margin="0,20,0,0" Click="DeleteButton"/>
+        <Button Content="Удалить" x:Name="DeleteBut" Margin="0,20,0,0" Click="DeleteButton"/>
     </StackPanel>
 </Window>

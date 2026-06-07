@@ -26,6 +26,7 @@ namespace dem_test_03
             InitializeComponent();
             LoadData();
             IdBox.Visibility = Visibility.Collapsed;
+            DeleteBut.Visibility = Visibility.Collapsed;
         }
 
         public OrderAddEditWindow(OrderDetail order)

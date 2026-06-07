@@ -28,7 +28,7 @@ namespace dem_test_03
             _current_user = user;
             UpdateUIState();
 
-            LoadData();
+            LoadProduct();
             LoadSuppliers();
             UnitSortComboBox.SelectedIndex = 0;
             SupplierSortComboBox.SelectedIndex = 0;
@@ -57,7 +57,7 @@ namespace dem_test_03
             SupplierSortComboBox.DisplayMemberPath = "Name";
         }
 
-        private void LoadData()
+        private void LoadProduct()
         {
             NameZone.Text = "Каталог";
             ProductList.ItemTemplate = (DataTemplate)FindResource("ProductTemplate");
@@ -98,7 +98,7 @@ namespace dem_test_03
 
         private void ProductViewChanged(object sender, EventArgs e)
         {
-            if (ProductList != null) LoadData();
+            if (ProductList != null) LoadProduct();
         }
 
         private void Product_Click(object sender, MouseButtonEventArgs e)
@@ -111,7 +111,7 @@ namespace dem_test_03
             Border border = sender as Border;
             Product product = border.DataContext as Product;
             new ProductEditWindow(product).ShowDialog();
-            LoadData();
+            LoadProduct();
         }
 
         private void Order_Click(object sender, MouseButtonEventArgs e)
@@ -136,7 +136,7 @@ namespace dem_test_03
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
         {
             new ProductEditWindow().ShowDialog();
-            LoadData();
+            LoadProduct();
         }
 
         private void OrdersButton_Click(object sender, RoutedEventArgs e)
@@ -146,7 +146,7 @@ namespace dem_test_03
 
         private void ProductButton_Click(object sender, RoutedEventArgs e)
         {
-            LoadData();
+            LoadProduct();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
