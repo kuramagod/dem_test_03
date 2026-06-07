@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -18,7 +19,7 @@ namespace dem_test_03
     /// </summary>
     public partial class OrderAddEditWindow : Window
     {
-        Order currentOrder = new Order();
+        OrderDetail currentOrder = new OrderDetail();
         bool isEdit = false;
         public OrderAddEditWindow()
         {
@@ -27,7 +28,7 @@ namespace dem_test_03
             IdBox.Visibility = Visibility.Collapsed;
         }
 
-        public OrderAddEditWindow(Order order)
+        public OrderAddEditWindow(OrderDetail order)
         {
             InitializeComponent();
             currentOrder = order;
@@ -36,30 +37,40 @@ namespace dem_test_03
             isEdit = true;
 
             IdBox.Text = currentOrder.Orderid.ToString();
-            CodeBox.Text = currentOrder.Code;
-            StatusBox.Text = currentOrder.Status;
-            PickpointAddressBox.SelectedItem = currentOrder.Pickpoint;
-            OrderDateBox.Text = currentOrder.OrderDate;
-            DeliveryDateBox.Text = currentOrder.DeliveryDate;
+            ProductBox.SelectedItem = currentOrder.Product;
+            StatusBox.SelectedItem = currentOrder.Order.Status;
+            PickpointAddressBox.SelectedItem = currentOrder.Order.Pickpoint;
+            OrderDateBox.Text = currentOrder.Order.OrderDate;
+            DeliveryDateBox.Text = currentOrder.Order.DeliveryDate;
         }
 
         private void LoadData()
         {
+            StatusBox.ItemsSource = DemTest03Context.GetContext().Statuses.ToList();
             PickpointAddressBox.ItemsSource = DemTest03Context.GetContext().Pickpoints.ToList();
+            ProductBox.ItemsSource = DemTest03Context.GetContext().Products.ToList();
+            StatusBox.DisplayMemberPath = "Name";
             PickpointAddressBox.DisplayMemberPath = "Name";
+            ProductBox.DisplayMemberPath = "Article";
         }
 
         private void SaveButton(object sender, RoutedEventArgs e)
         {
-            currentOrder.Code = CodeBox.Text;
-            currentOrder.Status = StatusBox.Text;
-            currentOrder.Pickpoint = PickpointAddressBox.SelectedItem as Pickpoint;
-            currentOrder.OrderDate = OrderDateBox.Text;
-            currentOrder.DeliveryDate = DeliveryDateBox.Text;
+
+            if (!isEdit && currentOrder.Order == null)
+            {
+                currentOrder.Order = new Order();
+            }
+
+            currentOrder.Product = ProductBox.SelectedItem as Product;
+            currentOrder.Order.Status = StatusBox.SelectedItem as Status;
+            currentOrder.Order.Pickpoint = PickpointAddressBox.SelectedItem as Pickpoint;
+            currentOrder.Order.OrderDate = OrderDateBox.Text;
+            currentOrder.Order.DeliveryDate = DeliveryDateBox.Text;
 
             if (!isEdit)
             {
-                DemTest03Context.GetContext().Orders.Add(currentOrder);
+                DemTest03Context.GetContext().OrderDetails.Add(currentOrder);
             }
             DemTest03Context.GetContext().SaveChanges();
             Close();
@@ -70,7 +81,7 @@ namespace dem_test_03
             MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить этот заказ?", "Подтверждение", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                DemTest03Context.GetContext().Orders.Remove(currentOrder);
+                DemTest03Context.GetContext().OrderDetails.Remove(currentOrder);
                 DemTest03Context.GetContext().SaveChanges();
 
                 Close();

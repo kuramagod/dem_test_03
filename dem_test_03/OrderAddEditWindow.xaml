@@ -12,11 +12,11 @@
 
         <TextBlock Text="ID" x:Name="IdBox"/>
 
-        <TextBlock Text="Артикул"/>
-        <TextBox x:Name="CodeBox"/>
+        <TextBlock Text="Артикл"/>
+        <ComboBox x:Name="ProductBox"/>
 
         <TextBlock Text="Статус"/>
-        <TextBox x:Name="StatusBox"/>
+        <ComboBox x:Name="StatusBox"/>
 
         <TextBlock Text="Адрес пункта выдачи"/>
         <ComboBox x:Name="PickpointAddressBox"/>

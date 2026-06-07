@@ -48,13 +48,13 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Grid.Column="1" Margin="10, 0">
-                        <TextBlock Text="{Binding Code, StringFormat=Артикул заказа {0}}" />
-                        <TextBlock Text="{Binding Status, StringFormat=Статус заказа {0}}"/>
-                        <TextBlock Text="{Binding Pickpoint.Name, StringFormat=Адрес пункта выдачи({0})}"/>
-                        <TextBlock Text="{Binding OrderDate, StringFormat=Дата заказа {0}}"/>
+                        <TextBlock Text="{Binding Product.Article, StringFormat=Артикул заказа {0}}" />
+                        <TextBlock Text="{Binding Order.Status.Name, StringFormat=Статус заказа {0}}"/>
+                        <TextBlock Text="{Binding Order.Pickpoint.Name, StringFormat=Адрес пункта выдачи({0})}"/>
+                        <TextBlock Text="{Binding Order.OrderDate, StringFormat=Дата заказа {0}}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="3" VerticalAlignment="Center" Margin="10, 0, 0, 0">
-                        <TextBlock Text="{Binding DeliveryDate, StringFormat=Дата доставки {0}}" />
+                        <TextBlock Text="{Binding Order.DeliveryDate, StringFormat=Дата доставки {0}}" />
                     </StackPanel>
                 </Grid>
             </Border>

@@ -15,7 +15,6 @@ public partial class DemTest03Context : DbContext
             _context = new DemTest03Context();
         return _context;
     }
-
     public DemTest03Context()
     {
     }
@@ -38,6 +37,8 @@ public partial class DemTest03Context : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<Role> Roles { get; set; }
+
+    public virtual DbSet<Status> Statuses { get; set; }
 
     public virtual DbSet<Supplier> Suppliers { get; set; }
 
@@ -90,14 +91,16 @@ public partial class DemTest03Context : DbContext
                 .HasColumnType("character varying")
                 .HasColumnName("order_date");
             entity.Property(e => e.Pickpointid).HasColumnName("pickpointid");
-            entity.Property(e => e.Status)
-                .HasColumnType("character varying")
-                .HasColumnName("status");
+            entity.Property(e => e.Statusid).HasColumnName("statusid");
             entity.Property(e => e.Userid).HasColumnName("userid");
 
             entity.HasOne(d => d.Pickpoint).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.Pickpointid)
                 .HasConstraintName("order_pickpoint_fk");
+
+            entity.HasOne(d => d.Status).WithMany(p => p.Orders)
+                .HasForeignKey(d => d.Statusid)
+                .HasConstraintName("order_status_fk");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.Userid)
@@ -183,6 +186,18 @@ public partial class DemTest03Context : DbContext
             entity.ToTable("role");
 
             entity.Property(e => e.Roleid).HasColumnName("roleid");
+            entity.Property(e => e.Name)
+                .HasColumnType("character varying")
+                .HasColumnName("name");
+        });
+
+        modelBuilder.Entity<Status>(entity =>
+        {
+            entity.HasKey(e => e.Statusid).HasName("status_pk");
+
+            entity.ToTable("status");
+
+            entity.Property(e => e.Statusid).HasColumnName("statusid");
             entity.Property(e => e.Name)
                 .HasColumnType("character varying")
                 .HasColumnName("name");

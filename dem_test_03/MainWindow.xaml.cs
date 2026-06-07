@@ -89,7 +89,10 @@ namespace dem_test_03
         {
             NameZone.Text = "Заявки";
             ProductList.ItemTemplate = (DataTemplate)FindResource("OrderTemplate");
-            ProductList.ItemsSource = DemTest03Context.GetContext().Orders.Include(o => o.Pickpoint).ToList();
+            ProductList.ItemsSource = DemTest03Context.GetContext().OrderDetails
+                .Include(o => o.Order).ThenInclude(o => o.Pickpoint)
+                .Include(o => o.Order).ThenInclude(o => o.Status)
+                .Include(o => o.Product).ToList();
             UpdateUIState();
         }
 
@@ -119,7 +122,7 @@ namespace dem_test_03
                 return;
             }
             Border border = sender as Border;
-            Order order = border.DataContext as Order;
+            OrderDetail order = border.DataContext as OrderDetail;
             new OrderAddEditWindow(order).ShowDialog();
             LoadOrder();
         }

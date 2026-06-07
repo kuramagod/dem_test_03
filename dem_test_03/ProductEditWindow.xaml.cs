@@ -95,9 +95,9 @@ namespace dem_test_03
 
         private void DeleteButton(object sender, RoutedEventArgs e)
         {
-            if (currentProduct.OrderDetails.Count == 0)
+            if (DemTest03Context.GetContext().OrderDetails.Any(x => x.Productid == currentProduct.Productid))
             {
-                MessageBox.Show("Невозможно удалить товар, так как он используется в заявках");
+                MessageBox.Show("Нельзя удалить товар, так как он присутствует в заказе!", "Ошибка", MessageBoxButton.OK);
                 return;
             }
             MessageBoxResult result = MessageBox.Show("Вы уверены, что хотите удалить этот товар?", "Подтверждение", MessageBoxButton.YesNo);
