@@ -77,9 +77,8 @@ namespace dem_test_03
             if (!string.IsNullOrEmpty(search))
                 query = query.Where(p => p.Name.Contains(search) || p.Description.Contains(search));
 
-            // Фильтрация по поставщикам
             if (SupplierSortComboBox.SelectedItem is Supplier s && s.Supplierid != -1)
-                query = query.Where(p => p.Supplier.Supplierid == s.Supplierid);
+                query = query.Where(p => p.Supplierid == s.Supplierid);
 
             query = UnitSortComboBox.SelectedIndex switch
             {
