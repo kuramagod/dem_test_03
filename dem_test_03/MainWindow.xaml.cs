@@ -53,7 +53,13 @@ namespace dem_test_03
 
         private void LoadSuppliers()
         {
-            SupplierSortComboBox.ItemsSource = new[] { new Supplier { Name = "Все поставщики", Supplierid = -1 } }.Concat(DemTest03Context.GetContext().Suppliers.ToList());
+            var suppliers = new List<Supplier>
+            {
+                new Supplier { Name = "Все поставщики", Supplierid = -1 }
+            };
+            suppliers.AddRange(DemTest03Context.GetContext().Suppliers);
+
+            SupplierSortComboBox.ItemsSource = suppliers;
             SupplierSortComboBox.DisplayMemberPath = "Name";
         }
 
