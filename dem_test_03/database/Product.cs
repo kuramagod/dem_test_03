@@ -36,4 +36,14 @@ public partial class Product
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 
     public virtual Supplier? Supplier { get; set; }
+
+    public string BackgroundColor
+    {
+        get
+        {
+            if (Quantity == 0) return "LightBlue";
+            if (Discount > 15) return "#2E8B57";
+            return "Transponent";
+        }
+    }
 }
